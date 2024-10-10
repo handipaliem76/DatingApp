@@ -17,8 +17,9 @@ public class AccountController(DataContext context, ITokenService tokenService) 
     public async Task<ActionResult<UserDto>> Register(RegisterDto registerDto)
     {
         if(await UserExists(registerDto.Username)) return BadRequest("Username is taken");
+        return Ok();
 
-        using var hmac = new HMACSHA512();
+        /* using var hmac = new HMACSHA512();
 
         var user = new AppUser
         {
@@ -34,7 +35,7 @@ public class AccountController(DataContext context, ITokenService tokenService) 
         {
             Username = registerDto.Username,
             Token = tokenService.CreateToken(user)
-        };
+        }; */
     }
 
     [HttpPost("login")]
